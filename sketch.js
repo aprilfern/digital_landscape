@@ -1,5 +1,11 @@
 let x, y;
 
+let cyberPiano;
+
+function preload(){
+  cyberPiano = loadSound('media/acybersworld.mp3');
+}
+
 function setup(){
   createCanvas(windowWidth, windowHeight);
   
@@ -12,7 +18,7 @@ function draw(){
   
   if(!gp){
     background(0);
-    fill(300);
+    fill(255);
     noStroke();
     textSize(24);
     text("Connect a gamepad and press any button", width/2, height/2);
