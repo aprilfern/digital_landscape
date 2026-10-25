@@ -1,9 +1,13 @@
 let x, y;
 
 let cyberPiano;
+let storyPiano;
+let scarletPiano;
 
 function preload(){
   cyberPiano = loadSound('media/acybersworld.mp3');
+  storyPiano = loadSound('media/beforethestory.mp3');
+  scarletPiano = loadSound('media/scarletforest.mp3');
 }
 
 function setup(){
