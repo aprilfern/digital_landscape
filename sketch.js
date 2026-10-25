@@ -3,8 +3,8 @@ let x, y;
 function setup(){
   createCanvas(windowWidth, windowHeight);
   
-  x = width/2;
-  y = height/2;
+  x = width * 0.2;
+  y = height * 0.8;
 }
 
 function draw(){
@@ -66,9 +66,13 @@ function star(x, y, radius1, radius2, npoints) {
 }
 
 function fillSky(){
+  fill(255, 255, 255);
   push();
   translate(width * 0.2, height * 0.3);
-  fill(255, 255, 255);
+  star(0, 0, 8, 15, 8);
+  pop();
+  push();
+  translate(width * 0.3, height * 0.4);
   star(0, 0, 8, 15, 8);
   pop();
 }
