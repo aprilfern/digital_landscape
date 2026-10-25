@@ -1,30 +1,50 @@
 let x, y;
-let px, py;
 
 function setup(){
   createCanvas(windowWidth, windowHeight);
   
   x = width/2;
   y = height/2;
-  px = x;
-  py = y;
 }
 
 function draw(){
   let gp = navigator.getGamepads()[0];
   
-  // Makes background into night sky dark blue to dark purple
-  // https://p5js.org/tutorials/color-gradients/
-  for(let y = 0; y < height; y++){
-    let a = map(y, 0, height, 0, 1);
-    stroke(lerpColor(color(17, 3, 79), color(48, 3, 79), a));
-    line(0, y, width, y);
+  if(!gp){
+    background(0);
+    fill(300);
+    noStroke();
+    textSize(24);
+    text("Connect a gamepad and press any button", width/2, height/2);
+    return;
   }
   
+  // Makes background into night sky dark blue to dark purple
+  // https://p5js.org/tutorials/color-gradients/
+  for(let canvasY = 0; canvasY < height; canvasY++){
+    let a = map(canvasY, 0, height, 0, 1);
+    stroke(lerpColor(color(17, 3, 79), color(48, 3, 79), a));
+    line(0, canvasY, width, canvasY);
+  }
+  
+  fillSky();
+  
+  let deadzone = 0.15;
+  let dx = abs(gp.axes[0]) > deadzone ? gp.axes[0] : 0;
+  let dy = abs(gp.axes[1]) > deadzone ? gp.axes[1] : 0;
+  
+  let speed = 5;
+  x += dx * speed;
+  y += dy * speed;
+  
+  x = constrain(x, 0, width);
+  y = constrain(y, 0, height);
+  
   push();
-  translate(width * 0.3, height * 0.8);
+  translate(x, y);
   rotate(60);
-  star(0, 0, 30, 70, 5);
+  fill(170, 250, 225);
+  star(0, 0, 15, 35, 5);
   pop();
   
 }
@@ -43,4 +63,12 @@ function star(x, y, radius1, radius2, npoints) {
     vertex(sx, sy);
   }
   endShape(CLOSE);
+}
+
+function fillSky(){
+  push();
+  translate(width * 0.2, height * 0.3);
+  fill(255, 255, 255);
+  star(0, 0, 8, 15, 8);
+  pop();
 }
