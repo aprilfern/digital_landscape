@@ -12,6 +12,8 @@ let starTwoY;
 let starThreeX;
 let starThreeY;
 
+let starRotate = false;
+
 let musicPlaying = false;
 
 // Shooting Star
@@ -36,6 +38,8 @@ let colorIndex = 0;
 
 let previousButtons = [];
 
+let randomStars = [];
+
 function preload(){
   cyberPiano = loadSound('media/acybersworld.mp3');
   storyPiano = loadSound('media/beforethestory.mp3');
@@ -55,6 +59,37 @@ function setup(){
   starTwoY = height * 0.4;
   starThreeX = width * 0.8;
   starThreeY = height * 0.4;
+  
+  // Coordinates of random stars
+  randomStars = [
+    {x: width * 0.2, y: height * 0.23},
+    {x: width * 0.2, y: height * 0.33},
+    {x: width * 0.25, y: height * 0.15},
+    {x: width * 0.65, y: height * 0.65},
+    {x: width * 0.05, y: height * 0.15},
+    {x: width * 0.75, y: height * 0.1},
+    {x: width * 0.5, y: height * 0.27},
+    {x: width * 0.45, y: height * 0.33},
+    {x: width * 0.23, y: height * 0.63},
+    {x: width * 0.62, y: height * 0.43},
+    {x: width * 0.72, y: height * 0.51},
+    {x: width * 0.35, y: height * 0.39},
+    {x: width * 0.52, y: height * 0.03},
+    {x: width * 0.41, y: height * 0.14},
+    {x: width * 0.15, y: height * 0.45},
+    {x: width * 0.09, y: height * 0.32},
+    {x: width * 0.11, y: height * 0.54},
+    {x: width * 0.35, y: height * 0.55},
+    {x: width * 0.48, y: height * 0.51},
+    {x: width * 0.61, y: height * 0.58},
+    {x: width * 0.78, y: height * 0.21},
+    {x: width * 0.58, y: height * 0.19},
+    {x: width * 0.65, y: height * 0.29},
+    {x: width * 0.25, y: height * 0.04},
+    {x: width * 0.91, y: height * 0.49},
+    {x: width * 0.88, y: height * 0.14},
+    {x: width * 0.89, y: height * 0.28},
+  ];
   
   textAlign(CENTER, CENTER);
 }
@@ -78,6 +113,35 @@ function draw(){
     stroke(lerpColor(color(17, 3, 79), color(48, 3, 79), a));
     line(0, canvasY, width, canvasY);
   }
+  
+  // Music Stars
+  fill(255, 255, 255);
+  push();
+  noStroke();
+  translate(starOneX, starOneY);
+  if(starRotate){
+    rotate(frameCount * 0.05);
+  }
+  star(0, 0, 10, 20, 8);
+  pop();
+  
+  push();
+  noStroke();
+  translate(starTwoX, starTwoY);
+  if(starRotate){
+    rotate(frameCount * 0.05);
+  }
+  star(0, 0, 10, 20, 8);
+  pop();
+  
+  push();
+  noStroke();
+  translate(starThreeX, starThreeY);
+  if(starRotate){
+    rotate(frameCount * 0.05);
+  }
+  star(0, 0, 10, 20, 8);
+  pop();
   
   fillSky();
   
@@ -109,6 +173,7 @@ function draw(){
   
   handleButtons(gp);
   
+  // Main green star that moves
   push();
   translate(x, y);
   noStroke();
@@ -183,6 +248,16 @@ function handleButtons(gp){
           else{
             colorIndex++;
           }
+          break;
+        // Button 3 also known as X
+        case 3:
+          if(starRotate){
+            starRotate = false;
+          }
+          else{
+            starRotate = true;
+          }
+          break;
       }
     }
     
@@ -208,43 +283,15 @@ function star(x, y, radius1, radius2, npoints) {
 }
 
 function fillSky(){
-  // Music Stars
-  fill(255, 255, 255);
-  push();
-  noStroke();
-  translate(starOneX, starOneY);
-  star(0, 0, 10, 20, 8);
-  pop();
-  push();
-  noStroke();
-  translate(starTwoX, starTwoY);
-  star(0, 0, 10, 20, 8);
-  pop();
-  push();
-  noStroke();
-  translate(starThreeX, starThreeY);
-  star(0, 0, 10, 20, 8);
-  pop();
-  
-  // Random Stars
-  push();
-  noStroke();
+  // Random Stars being put in the background
   fill(starColor[colorIndex]);
-  translate(width * 0.2, height * 0.23);
-  star(0, 0, 5, 8, 8);
-  pop();
-  push();
-  noStroke();
-  fill(starColor[colorIndex]);
-  translate(width * 0.2, height * 0.33);
-  star(0, 0, 5, 8, 8);
-  pop();
-  push();
-  noStroke();
-  fill(starColor[colorIndex]);
-  translate(width * 0.25, height * 0.15);
-  star(0, 0, 5, 8, 8);
-  pop();
   
-  
+  for(let i = 0; i < randomStars.length; i++){
+    let s = randomStars[i];
+    push();
+    noStroke();
+    translate(s.x, s.y);
+    star(0, 0, 5, 8, 8);
+    pop();
+  }
 }
