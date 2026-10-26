@@ -115,6 +115,7 @@ function draw(){
   }
   
   // Music Stars
+  // First Star
   fill(255, 255, 255);
   push();
   noStroke();
@@ -125,6 +126,7 @@ function draw(){
   star(0, 0, 10, 20, 8);
   pop();
   
+  // Second Star
   push();
   noStroke();
   translate(starTwoX, starTwoY);
@@ -134,6 +136,7 @@ function draw(){
   star(0, 0, 10, 20, 8);
   pop();
   
+  // Third Star
   push();
   noStroke();
   translate(starThreeX, starThreeY);
@@ -145,6 +148,7 @@ function draw(){
   
   fillSky();
   
+  // Checks if boolean was changed when button was pressed
   if(starFalling){
     shootY += shootSpeed;
     
