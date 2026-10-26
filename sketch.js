@@ -164,6 +164,7 @@ function draw(){
     }
   }
   
+  // Left Joystick
   let deadzone = 0.15;
   let dx = abs(gp.axes[0]) > deadzone ? gp.axes[0] : 0;
   let dy = abs(gp.axes[1]) > deadzone ? gp.axes[1] : 0;
@@ -203,6 +204,7 @@ function handleButtons(gp){
           break;
         // Button 1 or also know as A
         case 1:
+          // Gets the distance of the main green star to each of the big three music stars
           let d1 = dist(x, y, starOneX, starOneY);
           let d2 = dist(x, y, starTwoX, starTwoY);
           let d3 = dist(x, y, starThreeX, starThreeY);
@@ -287,9 +289,10 @@ function star(x, y, radius1, radius2, npoints) {
 }
 
 function fillSky(){
-  // Random Stars being put in the background
+  // Colors the random stars being put in the background
   fill(starColor[colorIndex]);
   
+  // Gets the random stars and places them in the background
   for(let i = 0; i < randomStars.length; i++){
     let s = randomStars[i];
     push();
