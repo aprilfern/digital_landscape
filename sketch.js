@@ -89,6 +89,16 @@ function setup(){
     {x: width * 0.91, y: height * 0.49},
     {x: width * 0.88, y: height * 0.14},
     {x: width * 0.89, y: height * 0.28},
+    {x: width * 0.88, y: height * 0.77},
+    {x: width * 0.09, y: height * 0.88},
+    {x: width * 0.63, y: height * 0.74},
+    {x: width * 0.39, y: height * 0.76},
+    {x: width * 0.49, y: height * 0.66},
+    {x: width * 0.12, y: height * 0.68},
+    {x: width * 0.29, y: height * 0.91},
+    {x: width * 0.75, y: height * 0.94},
+    {x: width * 0.51, y: height * 0.89},
+    {x: width * 0.85, y: height * 0.64},
   ];
   
   textAlign(CENTER, CENTER);
@@ -110,7 +120,7 @@ function draw(){
   // https://p5js.org/tutorials/color-gradients/
   for(let canvasY = 0; canvasY < height; canvasY++){
     let a = map(canvasY, 0, height, 0, 1);
-    stroke(lerpColor(color(17, 3, 79), color(48, 3, 79), a));
+    stroke(lerpColor(color(11, 11, 77), color(79, 16, 125), a));
     line(0, canvasY, width, canvasY);
   }
   
