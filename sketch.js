@@ -12,6 +12,10 @@ let starTwoY;
 let starThreeX;
 let starThreeY;
 
+// Oval under star
+let ovalX;
+let ovalY;
+
 let starRotate = false;
 
 let musicPlaying = false;
@@ -36,6 +40,8 @@ let starColor = [
 
 let colorIndex = 0;
 
+let shapeChange = 0;
+
 let previousButtons = [];
 
 let randomStars = [];
@@ -59,6 +65,10 @@ function setup(){
   starTwoY = height * 0.4;
   starThreeX = width * 0.8;
   starThreeY = height * 0.4;
+  
+  // Coordinates for the oval
+  ovalX = width * 0.2;
+  ovalY = height * 0.8;
   
   // Coordinates of random stars
   randomStars = [
@@ -188,15 +198,45 @@ function draw(){
   
   handleButtons(gp);
   
-  // Main green star that moves
+  // ellipse
   push();
-  translate(x, y);
-  noStroke();
-  rotate(60);
-  fill(170, 250, 225);
-  star(0, 0, 15, 35, 5);
+  fill(255, 180);
+  translate(ovalX, ovalY);
+  ellipse(0, 0, 95, 75);
+  fill(0);
+  textStyle(ITALIC);
+  textSize(14);
+  text("origin", 0, 0);
   pop();
   
+  // Main purple star that moves
+  if(shapeChange === 0){
+    push();
+    translate(x, y);
+    noStroke();
+    rotate(60);
+    fill(166, 120, 196);
+    star(0, 0, 15, 35, 5);
+    pop();
+  }
+  else if(shapeChange === 1){
+    push();
+    translate(x, y);
+    noStroke();
+    rotate(60);
+    fill(166, 120, 196);
+    star(0, 0, 15, 35, 6);
+    pop();
+  }
+  else if(shapeChange === 2){
+    push();
+    translate(x, y);
+    noStroke();
+    rotate(60);
+    fill(166, 120, 196);
+    star(0, 0, 15, 35, 7);
+    pop();
+  }
 }
 
 function handleButtons(gp){
@@ -218,6 +258,9 @@ function handleButtons(gp){
           let d1 = dist(x, y, starOneX, starOneY);
           let d2 = dist(x, y, starTwoX, starTwoY);
           let d3 = dist(x, y, starThreeX, starThreeY);
+          
+          // Gets distance of origin and star
+          let d4 = dist(x, y, ovalX, ovalY);
           
           if(d1 < 20){
             if(musicPlaying){
@@ -253,6 +296,12 @@ function handleButtons(gp){
             else{
               scarletPiano.play();
               musicPlaying = true;
+            }
+          }
+          else if(d4 < 20){
+            shapeChange++;
+            if(shapeChange%3 === 0){
+              shapeChange = 0;
             }
           }
           break;
