@@ -237,6 +237,15 @@ function draw(){
     star(0, 0, 15, 35, 7);
     pop();
   }
+  else if(shapeChange === 3){
+    push();
+    translate(x, y);
+    noStroke();
+    rotate(60);
+    fill(166, 120, 196);
+    star(0, 0, 15, 35, 8);
+    pop();
+  }
 }
 
 function handleButtons(gp){
@@ -298,9 +307,9 @@ function handleButtons(gp){
               musicPlaying = true;
             }
           }
-          else if(d4 < 20){
+          else if(d4 < 30){
             shapeChange++;
-            if(shapeChange%3 === 0){
+            if(shapeChange%4 === 0){
               shapeChange = 0;
             }
           }
