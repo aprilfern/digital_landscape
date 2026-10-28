@@ -281,12 +281,16 @@ function handleButtons(gp){
   });
 }
 
-// https://editor.p5js.org/p5/sketches/Form:_Star
 // Creates star
+// https://editor.p5js.org/p5/sketches/Form:_Star
 function star(x, y, radius1, radius2, npoints) {
+  // Divides the circle into the number of points on the star
   let angle = TWO_PI / npoints;
   let halfAngle = angle / 2.0;
+  
+  // p5.js function to create custom shape
   beginShape();
+  // Loops around the circle to create the points of the star
   for (let a = 0; a < TWO_PI; a += angle) {
     let sx = x + cos(a) * radius2;
     let sy = y + sin(a) * radius2;
@@ -295,6 +299,7 @@ function star(x, y, radius1, radius2, npoints) {
     sy = y + sin(a + halfAngle) * radius1;
     vertex(sx, sy);
   }
+  // Ends the drawing of the custom shape
   endShape(CLOSE);
 }
 
