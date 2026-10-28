@@ -292,11 +292,15 @@ function star(x, y, radius1, radius2, npoints) {
   beginShape();
   // Loops around the circle to create the points of the star
   for (let a = 0; a < TWO_PI; a += angle) {
+    // Calculates the point of the star
     let sx = x + cos(a) * radius2;
     let sy = y + sin(a) * radius2;
+    // Adds the point to the shape
     vertex(sx, sy);
+    // Calculates the dip between two points of a star
     sx = x + cos(a + halfAngle) * radius1;
     sy = y + sin(a + halfAngle) * radius1;
+    // Adds the dip to the shape
     vertex(sx, sy);
   }
   // Ends the drawing of the custom shape
